@@ -1,0 +1,23 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: ksingh721
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: email-sender
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+
+plugins:
+  - serverless-offline
+
+functions:
+  sendEmail:
+    handler: handler.sendEmail
+    events:
+      - http:
+          path: send
+          method: post
+    environment:
+      SES_REGION: us-east-1
+      SENDER_EMAIL: 'erenkrishna1414@gmail.com' # Ensure this email is verified with SES
